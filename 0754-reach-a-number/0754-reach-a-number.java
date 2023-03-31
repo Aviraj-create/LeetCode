@@ -6,19 +6,16 @@ class Solution {
         target=Math.abs(target);
         
         
-        while(sum<target)
-        {
+        while(true){
             step++;
             sum+=step;
+            
+            if(sum==target)return step;
+            else if(sum>target &&(sum-target)%2==0)
+            {
+                return step;
+            }
         }
-        
-        while((sum-target)%2!=0)
-        {
-            step++;
-            sum+=step;
-        }
-        
-        return step;
         
         
         
