@@ -21,8 +21,11 @@ private boolean dfs(int[] nums, int[] sums, int index, int target) {
 		return false;
 	}
 	for (int i = 0; i < 4; i++) {
-		if (sums[i] + nums[index] > target)
-			continue;
+		// if (sums[i] + nums[index] > target)
+		// 	continue;
+        if (sums[i] + nums[index] > target || (i > 0 && sums[i] == sums[i - 1])) {
+    continue;
+}
 		sums[i] += nums[index];
 		if (dfs(nums, sums, index -1, target))
 			return true;
