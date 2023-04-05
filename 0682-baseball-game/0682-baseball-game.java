@@ -23,7 +23,11 @@ class Solution {
                 arr.add(Integer.parseInt(op));
             }
         }
-       int sum = arr.stream().mapToInt(Integer::intValue).sum();
+       int sum = 0;
+        for(int i=0;i<arr.size();i++)
+        {
+            sum+=arr.get(i);
+        }
         return sum;
         
     }
