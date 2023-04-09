@@ -27,8 +27,8 @@ class Solution {
             }
         }
         
-        System.out.println(map1);
-        System.out.println(map2);
+//         System.out.println(map1);
+//         System.out.println(map2);
         
         
         
