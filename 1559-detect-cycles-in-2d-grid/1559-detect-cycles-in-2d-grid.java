@@ -1,35 +1,38 @@
 class Solution {
     public boolean containsCycle(char[][] grid) {
         
-        int n=grid.length;
-        int m=grid[0].length;
+        boolean[][] visited=new boolean[grid.length][grid[0].length];
         
-        boolean visited[][]=new boolean[n][m];
-        
-       for(int i=0;i<n;i++){
-           for(int j=0;j<m;j++)
-           {
-               if(!visited[i][j] && dfs(i,j,grid[i][j],grid,visited))
-               {return true;}
-           }   
-       }
-        return false;
+        for(int i=0;i<grid.length;i++)
+            {
+                for(int j=0;j<grid[0].length;j++)
+                    {
+                        if(!visited[i][j] && dfs(i,j,grid,visited,grid[i][j]))
+                        {
+                            return true;
+                        }
+                    }
+            }
+            
+            return false;
+                    
     }
     
-    public boolean dfs(int i,int j,char target,char[][]grid,boolean[][]visited)
+    private boolean dfs(int i,int j,char[][]grid,boolean[][] visited,char target)
     {
-        if(i<0 || j<0 || i>=grid.length || j>=grid[0].length || grid[i][j]!=target)
-        {return false;}
-        
-        if(visited[i][j])
+        if(i<0 || j<0 || i>=grid.length || j>=grid[0].length || grid[i][j]!=target )
         {
-            return true;
+            return false;
         }
         
+        if(visited[i][j])return true;
         visited[i][j]=true;
         grid[i][j]='#';
         
-        boolean found=dfs(i+1,j,target,grid,visited) || dfs(i,j+1,target,grid,visited) || dfs(i-1,j,target,grid,visited) || dfs(i,j-1,target,grid,visited);
+        boolean found=dfs(i+1,j,grid,visited,target)
+            ||dfs(i,j+1,grid,visited,target)
+            || dfs(i-1,j,grid,visited,target)
+            ||dfs(i,j-1,grid,visited,target);
         
         grid[i][j]=target;
         return found;
