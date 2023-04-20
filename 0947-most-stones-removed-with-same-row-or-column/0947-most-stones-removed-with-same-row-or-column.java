@@ -75,7 +75,7 @@ class Solution {
                count++;
            }
        }
-        System.out.println(ds.find(0));
+        // System.out.println(ds.find(0));
         return stones.length-count;
     }
 }
