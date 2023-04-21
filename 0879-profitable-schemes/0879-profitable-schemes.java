@@ -16,7 +16,7 @@ class Solution {
         notinclude=f(k+1,i,j,minProfit,group,profit,n);
         include=f(k+1,i+group[k],Math.min(j+profit[k],minProfit),minProfit,group,profit,n);
         
-        return dp[k][i][j]=(include + notinclude)%mod;
+        return dp[k][i][j]=(include%mod + notinclude%mod)%mod;
         
         
     }
