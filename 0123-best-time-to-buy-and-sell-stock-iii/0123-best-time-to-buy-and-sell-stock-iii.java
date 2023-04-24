@@ -1,27 +1,28 @@
 class Solution {
-    Integer dp[][][];
+    int dp[][][];
     public int maxProfit(int[] prices) {
-        dp=new Integer [prices.length][2][3];
+        dp=new int[prices.length+1][2][3];
         
-        return solver(0,prices,1,2);
+        for(int i=prices.length-1;i>=0;i--)
+        {
+            for(int buy=0;buy<=1;buy++)
+            {
+                for(int cap=1;cap<=2;cap++)
+                {
+                   if(buy==0){// We can buy the stock
+                    dp[i][buy][cap] = Math.max(0+dp[i+1][0][cap], 
+                                -prices[i] + dp[i+1][1][cap]);
+                 }
+    
+                if(buy==1){// We can sell the stock
+                    dp[i][buy][cap] = Math.max(0+dp[i+1][1][cap],
+                                prices[i] + dp[i+1][0][cap-1]);
+                }
+                }
+            }
+        }
+        return dp[0][0][2];
     }
     
-    public int solver(int idx,int[]prices,int buy,int cap)
-    {
-        if(cap==0)return 0;
-        if(idx==prices.length)return 0;
-            if(dp[idx][buy][cap]!=null)return dp[idx][buy][cap];
-        if(buy==1)
-            {
-                int yes=-prices[idx]+solver(idx+1,prices,0,cap);
-                int no=0+solver(idx+1,prices,1,cap);
-            return dp[idx][buy][cap]=Math.max(yes,no);
-            }   
-        else
-        {
-            int yess=prices[idx]+solver(idx+1,prices,1,cap-1);
-            int nos=0+solver(idx+1,prices,0,cap);
-            return dp[idx][buy][cap]=Math.max(yess,nos);
-        }
-    }
+    
 }
