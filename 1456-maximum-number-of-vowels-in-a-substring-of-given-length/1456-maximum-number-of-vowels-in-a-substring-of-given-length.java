@@ -1,38 +1,23 @@
 class Solution {
+    public static boolean f(char ch) {
+        return (ch == 'a' || ch == 'e' || ch == 'i' | ch == 'o' || ch == 'u');
+    }
     public int maxVowels(String s, int k) {
-        int maxV=0;
-        int temp=Integer.MIN_VALUE;
-        Set<Character> set=new HashSet<>();
-        set.add('a');
-        set.add('e');
-        set.add('i');
-        set.add('o');
-        set.add('u');
-        
-        int j=0;
-        int i=0;
-        for(;i<k;i++)
-        {
-            if(set.contains(s.charAt(i)))
-            {
-                maxV++;
-            }
+        int max = 0, n = s.length();
+        int count = 0;
+        for(int i = 0; i < k; i++) {
+            if(f(s.charAt(i))) count++;
         }
-        temp=Math.max(temp,maxV);
-        while(i!=s.length())
-        {
-            System.out.println(s.charAt(i)+ " "+ s.charAt(j));
-            if(set.contains(s.charAt(i)))
-                maxV++;
-            if(set.contains(s.charAt(j)))
-                maxV--;
-            j++;
-            i++;
-            temp=Math.max(temp,maxV);
+        max = count;
+		
+        for(int  i = k; i < n; i++) {
+		
+            if(f(s.charAt(i - k))) count--;
+		
+            if(f(s.charAt(i))) count++;
+			
+            max = Math.max(max, count);
         }
-        
-        return temp;
-               
-    
-}
+        return max;
+    }
 }
