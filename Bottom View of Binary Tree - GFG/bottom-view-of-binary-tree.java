@@ -143,7 +143,7 @@ class Solution
        {
            Modify w=q.poll();
         //   if(!map.containsKey(w.hd))
-           
+           //int the top view we will replace every existing key to put the last feeded Modify class Node in it
                map.put(w.hd,w);
            
            if(w.temp.left!=null)
