@@ -10,15 +10,15 @@ class Solution {
         int rows = matrix.length;
         int cols = matrix[0].length;
         dp = new int[rows][cols];
-        int maxPathLength = 0;
+        int max = 0;
         
         for (int i = 0; i < rows; i++) {
             for (int j = 0; j < cols; j++) {
-                maxPathLength = Math.max(maxPathLength, f(i, j, matrix));
+                max = Math.max(max, f(i, j, matrix));
             }
         }
         
-        return maxPathLength;
+        return max;
     }
     
     public int f(int i, int j, int[][] matrix) {
@@ -26,19 +26,19 @@ class Solution {
             return dp[i][j];
         }
         
-        int maxPath = 1;
+        int maxP = 1;
         
         for (int[] dir : directions) {
-            int newRow = i + dir[0];
-            int newCol = j + dir[1];
+            int x = i + dir[0];
+            int y = j + dir[1];
             
-            if (newRow >= 0 && newRow < matrix.length && newCol >= 0 && newCol < matrix[0].length
-                    && matrix[newRow][newCol] > matrix[i][j]) {
-                maxPath = Math.max(maxPath, 1 + f(newRow, newCol, matrix));
+            if (x >= 0 && x < matrix.length && y >= 0 && y < matrix[0].length
+                    && matrix[x][y] > matrix[i][j]) {
+                maxP = Math.max(maxP, 1 + f(x, y, matrix));
             }
         }
         
-        dp[i][j] = maxPath;
-        return maxPath;
+        dp[i][j] = maxP;
+        return maxP;
     }
 }
