@@ -15,7 +15,7 @@ class Solution {
     {
         if(idx>=nums.length)return 0;
         
-        // if(dp[idx][canDel]!=null)return dp[idx][canDel];
+        if(dp[idx][canDel]!=null)return dp[idx][canDel];
         int count=0;
         int skip=0;
         while(idx<nums.length && nums[idx]==1)
