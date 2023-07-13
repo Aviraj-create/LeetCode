@@ -1,17 +1,17 @@
 class Solution {
-    public boolean canFinish(int numCourses, int[][] arr) {
+    public boolean canFinish(int numCourses, int[][] prerequisites) {
         
-        ArrayList<ArrayList<Integer>>adj=new ArrayList<>();
+        ArrayList<ArrayList<Integer>> adj=new ArrayList<>();
         for(int i=0;i<numCourses;i++)
         {
             adj.add(new ArrayList<>());
         }
-        for(int m=0;m<arr.length;m++)
+        for(int i[]:prerequisites)
         {
-            adj.get(arr[m][0]).add(arr[m][1]);
+            adj.get(i[0]).add(i[1]);
         }
         
-        int []indegree=new int[numCourses];
+        int[]indegree=new int[numCourses];
         
         for(int i=0;i<numCourses;i++)
         {
@@ -20,31 +20,24 @@ class Solution {
                 indegree[it]++;
             }
         }
-        
-        Queue<Integer>q=new LinkedList<>();
+        Queue<Integer> q=new LinkedList<>();
         
         for(int i=0;i<indegree.length;i++)
         {
-            if(indegree[i]==0)
-            {
-                q.add(i);
-            }
+            if(indegree[i]==0)q.add(i);
         }
-        ArrayList<Integer>topo=new ArrayList<>();
-        
+        ArrayList<Integer> topo=new ArrayList<>();
         while(!q.isEmpty())
         {
-            int curr=q.poll();
-            topo.add(curr);
-            for(int p:adj.get(curr))
+            int temp=q.poll();
+            topo.add(temp);
+            for(int i:adj.get(temp))
             {
-                indegree[p]--;
-                if(indegree[p]==0){q.add(p);}
+                indegree[i]--;
+                if(indegree[i]==0)q.add(i);
             }
         }
         
-        if(topo.size()==numCourses)return true;
-        return false;
-        
+        return (topo.size()==numCourses)?true:false;
     }
 }
