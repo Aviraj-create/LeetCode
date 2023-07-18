@@ -1,14 +1,13 @@
 class Solution {
     public int minimumDeleteSum(String s1, String s2) {
-        Integer[][] memo = new Integer[s1.length()][s2.length()];
-        return f(0, 0, s1, s2, memo);
+        Integer[][] dp=new Integer[s1.length()+1][s2.length()+1];
+        return f(0,0,s1,s2,dp);
     }
     
-    int f(int i, int j, String s1, String s2, Integer[][] memo) {
-        if (i == s1.length() && j == s2.length()) {
+    public int f(int i,int j,String s1,String s2,Integer[][]dp)
+    {
+        if(i==s1.length() && j==s2.length())
             return 0;
-        }
-        
         if (i == s1.length()) {
             int sum = 0;
             for (int k = j; k < s2.length(); k++) {
@@ -16,7 +15,7 @@ class Solution {
             }
             return sum;
         }
-        
+
         if (j == s2.length()) {
             int sum = 0;
             for (int k = i; k < s1.length(); k++) {
@@ -24,18 +23,18 @@ class Solution {
             }
             return sum;
         }
+        if(dp[i][j]!=null)return dp[i][j];
         
-        if (memo[i][j] != null) {
-            return memo[i][j];
+        if(s1.charAt(i)==s2.charAt(j))
+        {
+            return dp[i][j]=f(i+1,j+1,s1,s2,dp);
         }
+        int temp1=s1.charAt(i)+f(i+1,j,s1,s2,dp);
+        int temp2=s2.charAt(j)+f(i,j+1,s1,s2,dp);
         
-        if (s1.charAt(i) == s2.charAt(j)) {
-            return memo[i][j] = f(i + 1, j + 1, s1, s2, memo);
-        }
-        
-        int deleteS1 = s1.charAt(i) + f(i + 1, j, s1, s2, memo);
-        int deleteS2 = s2.charAt(j) + f(i, j + 1, s1, s2, memo);
-        
-        return memo[i][j] = Math.min(deleteS1, deleteS2);
+        return dp[i][j]=Math.min(temp1,temp2);
     }
 }
+
+
+
