@@ -19,7 +19,7 @@ class Solution {
             if(t>=pq.peek().time){
                 
             Pair temp=pq.poll();
-            System.out.println(temp.ch);
+            // System.out.println(temp.ch);
             t++;
             temp.f--;
             temp.time = temp.time + n+1;
@@ -32,7 +32,7 @@ class Solution {
             }
             else
                {
-                System.out.println('*');
+                // System.out.println('*');
                 t++;
                 
             }
